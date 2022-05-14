@@ -19,6 +19,7 @@ def get_input(message, validation):
     from_user = ''
     while not [element for element in validation if(element in from_user)]:
         from_user = input(message).lower()
+    return from_user
 
 
 def main():
@@ -30,8 +31,13 @@ def main():
     deal(table)
 
     #hit or stand
-    user_choice = get_input("(H)it  or  (S)tand", ['h','s'])
-    print(user_choice)
+    user_choice = ''
+    while user_choice != 's':
+        user_choice = get_input("(H)it  or  (S)tand", ['h','s'])
+        print('Hit')
+        player.add_card_to_hand(random.choice(cards))
+
+    print(f'Player exits with {player.cards}')
 
     #dealer sequence
 
