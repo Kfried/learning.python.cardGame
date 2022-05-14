@@ -36,6 +36,9 @@ def main():
         user_choice = get_input("(H)it  or  (S)tand", ['h','s'])
         print('Hit')
         player.add_card_to_hand(random.choice(cards))
+        if player.bust:
+            print(f"You bust with {player.card_total}")
+            break
 
     print(f'Player exits with {player.cards}')
 
