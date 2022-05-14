@@ -22,9 +22,12 @@ class Player:
     def bust_check(self):
         if self.card_total>21:
             self.bust = True
+        else:
+            self.bust = False
 
     def switch_ace(self):
         if 11 in self.cards:
             index = self.cards.index(11)
             self.cards[index] = 1
             self.add_up_cards()
+            self.bust_check()
