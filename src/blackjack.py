@@ -1,5 +1,6 @@
-import random
 from art import logo
+import random
+
 print(logo)
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -93,8 +94,14 @@ def main():
             players['player'].append(draw_card())
             display_cards(players, False)
             if bust_check(players['player']):
-                print(f"You go bust with {sum(players['player'])}")
-                break
+                if 11 in players['player']:
+                    index = players['player'].index(11)
+                    players['player'][index] = 1
+                    if not bust_check(players['player']):
+                        print(f"You bust, changing your ace to 1")
+                else:
+                    print(f"You go bust with {sum(players['player'])}")
+                    break
         else:
             print("Stand")
             dealer_card_count = len(players['dealer'])
