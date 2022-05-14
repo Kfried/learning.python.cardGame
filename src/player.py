@@ -1,14 +1,15 @@
 class Player:
-    cards = []
 
     def __init__(self, name, dealer):
         self.name = name
         self.dealer = dealer
         self.card_total = 0
         self.bust = False
+        self.cards = []
 
 
     def add_card_to_hand(self, card):
+        print(f'adding {card} to {self.cards} for {self.name}') #todo remove
         self.cards.append(card)
         self.add_up_cards()
         self.bust_check()
@@ -31,3 +32,9 @@ class Player:
             self.cards[index] = 1
             self.add_up_cards()
             self.bust_check()
+
+    def display_cards(self, show):
+        message = f'{self.name} : '
+        for card in self.cards:
+            message += f" {card}"
+        print(message)
