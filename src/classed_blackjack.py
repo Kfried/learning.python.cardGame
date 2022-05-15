@@ -7,6 +7,8 @@ print(logo)
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 def deal(players):
+    """deal(dictionary players) adds initial cards to the
+    players supplied"""
     for deal_card in range(2):
         player_card = random.choice(cards)
         dealer_card = random.choice(cards)
@@ -18,6 +20,7 @@ def deal(players):
     return players
 
 def get_input(message, validation):
+    """get_input(string input_message, list [valid_inputs] asks for inputs with validation values. Returns input"""
     from_user = ''
     while not [element for element in validation if(element in from_user)]:
         from_user = input(message).lower()
@@ -32,8 +35,9 @@ def main():
              "dealer": dealer}
     deal(table)
 
+
+
     #hit or stand
-    user_choice = ''
     while True:
         user_choice = get_input("(H)it  or  (S)tand :", ['h','s'])
         if user_choice.lower() == 'h':
@@ -46,14 +50,9 @@ def main():
                 print(f"You bust with {player.card_total}")
                 break
         elif user_choice.lower() == 's':
-            print("Player stands with\n")
+            print("Player stands.")
             player.display_cards(True)
             break
-
-
-
-
-    print(f'Player exits with {player.cards}')
 
     #dealer sequence
     while dealer.card_total < 17:
@@ -65,6 +64,8 @@ def main():
             print (f'Dealer went bust with {dealer.card_total}')
 
     #who won
+    player.display_cards(True)
+    dealer.display_cards(True)
     if dealer.bust or dealer.card_total < player.card_total:
         print ('You Won ')
     elif player.bust or dealer.card_total >= player.card_total:

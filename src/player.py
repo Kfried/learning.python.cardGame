@@ -35,5 +35,8 @@ class Player:
     def display_cards(self, show: object) -> object:
         message = f'{self.name} : '
         for card in self.cards:
-            message += f" {card}"
+            if not show and card == self.cards[1]:
+                message += "*"
+            else:
+                message += f" {card}"
         print(message)
