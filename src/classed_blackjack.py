@@ -10,9 +10,11 @@ def deal(players):
     for deal_card in range(2):
         player_card = random.choice(cards)
         dealer_card = random.choice(cards)
-        print(f'Dealer draws {dealer_card} Player draws {player_card}')
         players['player'].add_card_to_hand(player_card)
         players['dealer'].add_card_to_hand(dealer_card)
+    print (f'The game starts with')
+    players['player'].display_cards(True)
+    players['dealer'].display_cards(False)
     return players
 
 def get_input(message, validation):
@@ -32,13 +34,22 @@ def main():
 
     #hit or stand
     user_choice = ''
-    while user_choice != 's':
-        user_choice = get_input("(H)it  or  (S)tand", ['h','s'])
-        print('Hit')
-        player.add_card_to_hand(random.choice(cards))
-        if player.bust:
-            print(f"You bust with {player.card_total}")
+    while True:
+        user_choice = get_input("(H)it  or  (S)tand :", ['h','s'])
+        if user_choice.lower() == 'h':
+            print('Hit')
+            new_card = random.choice(cards)
+            print(f"Player draws {new_card}")
+            player.add_card_to_hand(new_card)
+            player.display_cards(True)
+            if player.bust:
+                print(f"You bust with {player.card_total}")
+                break
+        elif user_choice.lower() == 's':
+            print("Player stands with\n")
+            player.display_cards(True)
             break
+
 
 
 
@@ -46,7 +57,10 @@ def main():
 
     #dealer sequence
     while dealer.card_total < 17:
-        dealer.add_card_to_hand(random.choice(cards))
+        new_card = random.choice(cards)
+        print(f'Dealer draws {new_card}')
+        dealer.add_card_to_hand(new_card)
+        dealer.display_cards(True)
         if dealer.bust:
             print (f'Dealer went bust with {dealer.card_total}')
 
@@ -55,9 +69,5 @@ def main():
         print ('You Won ')
     elif player.bust or dealer.card_total >= player.card_total:
         print ('dealer Wins')
-
-
-    for k in table:
-        table[k].display_cards(False)
 
 main()
