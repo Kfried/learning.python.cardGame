@@ -40,11 +40,21 @@ def main():
             print(f"You bust with {player.card_total}")
             break
 
+
+
     print(f'Player exits with {player.cards}')
 
     #dealer sequence
+    while dealer.card_total < 17:
+        dealer.add_card_to_hand(random.choice(cards))
+        if dealer.bust:
+            print (f'Dealer went bust with {dealer.card_total}')
 
     #who won
+    if dealer.bust or dealer.card_total < player.card_total:
+        print ('You Won ')
+    elif player.bust or dealer.card_total >= player.card_total:
+        print ('dealer Wins')
 
 
     for k in table:
